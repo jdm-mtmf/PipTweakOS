@@ -1,0 +1,23 @@
+# Raw partition dumps & firmware images (keep out of Git; distribute via GitHub Releases)
+*.img
+*.bin
+*.sparse
+super/
+dumps/
+backups/
+
+# Device-unique radio/IMEI partitions (NEVER commit to public repo!)
+*nvram*
+*nvdata*
+*proinfo*
+*protect1*
+*protect2*
+*persist*
+
+# Local audit dumps containing serial numbers or private identifiers
+audit_output/
+
+# OS / Editor files
+.DS_Store
+*.swp
+__pycache__/
