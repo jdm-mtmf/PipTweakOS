@@ -6,10 +6,10 @@ After booting a clean system image, we apply device-specific hardware fixes for 
 2. **Display Density Calibration (`640 x 480` on 3.0" Panel)**: Stock hardcodes `160 ppi` (`mdpi`), tricking Android into thinking the screen is `5.00 inches` ($\frac{800\text{ px}}{160\text{ ppi}} = 5.0"$).
 3. **Radio / Baseband & Background Power Saving**: Restrict background wakeups and tune 2G/3G cellular sleep states to maximize battery life on the `900 mAh` cell and weak internal antennas.
 
-## 2. RecoveryOS Hardware Fixes
+## 2. PipTweakOS Hardware Fixes
 
 ### 2.1: Runtime Resource Overlay (RRO) for `power_profile.xml`
-We compile a lightweight overlay APK (`RecoveryOS-XS18Pro-Overlay.apk`) placed in `/product/overlay/` (or `/system/product/overlay/`) with:
+We compile a lightweight overlay APK (`PipTweakOS-XS18Pro-Overlay.apk`) placed in `/product/overlay/` (or `/system/product/overlay/`) with:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <device name="Android">

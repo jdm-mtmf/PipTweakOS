@@ -1,4 +1,4 @@
-# RecoveryOS Patched fstab.mt6580 for Soyes XS18 Pro (Tigers TIS001_S4)
+# PipTweakOS Patched fstab.mt6580 for Soyes XS18 Pro (Tigers TIS001_S4)
 # Stock bug: zramsize=90%,max_comp_streams=1,swapprio=10 (1.72GB single-stream ZRAM on 1.92GB RAM)
 # Fix: 25% ZRAM (~500MB) with 4 parallel compression streams matching the quad-core MT6580
 /dev/block/zram0 none swap defaults zramsize=25%,max_comp_streams=4,swapprio=10

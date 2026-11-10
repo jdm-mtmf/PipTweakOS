@@ -1,4 +1,4 @@
-# RecoveryOS Automation Scripts
+# PipTweakOS Automation Scripts
 
 This directory contains host-side shell and Python scripts to automate non-destructive device auditing, partition backups, and image preparation.
 

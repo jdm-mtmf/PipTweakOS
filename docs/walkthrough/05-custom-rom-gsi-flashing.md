@@ -1,7 +1,7 @@
 # Stage 5: Custom ROM / Treble GSI Flashing (`fastbootd`)
 
 ## 1. Objective & Why It Matters
-Because the **Soyes XS18 Pro (`TIS001_S4`)** supports **Project Treble (`VNDK 29.0`)**, **System-as-Root**, and **Dynamic Partitions (`super`)**, its hardware-specific MediaTek drivers are isolated in the `vendor` partition. This allows us to completely replace the malware-infected stock `system` partition with a clean, open-source **32-bit ARM (`arm` / `armeabi-v7a`) Generic System Image (GSI)** or our custom-built **RecoveryOS** system image.
+Because the **Soyes XS18 Pro (`TIS001_S4`)** supports **Project Treble (`VNDK 29.0`)**, **System-as-Root**, and **Dynamic Partitions (`super`)**, its hardware-specific MediaTek drivers are isolated in the `vendor` partition. This allows us to completely replace the malware-infected stock `system` partition with a clean, open-source **32-bit ARM (`arm` / `armeabi-v7a`) Generic System Image (GSI)** or our custom-built **PipTweakOS** system image.
 
 ## 2. Target Image Architecture Requirements
 Based on our verified hardware profile ([01-device-profile.md](../01-device-profile.md)):
@@ -27,7 +27,7 @@ fastboot delete-logical-partition product
 
 # Erase and flash the new clean system image
 fastboot erase system
-fastboot flash system recoveryos-arm32-ab-vanilla.img
+fastboot flash system piptweakos-arm32-ab-vanilla.img
 
 # Perform a clean userdata format before first boot
 fastboot -w

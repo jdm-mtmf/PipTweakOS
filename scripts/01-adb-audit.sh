@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# RecoveryOS Stage 1: Non-Destructive Read-Only ADB Audit Script
+# PipTweakOS Stage 1: Non-Destructive Read-Only ADB Audit Script
 # Target: Soyes XS18 Pro (Tigers TIS001_S4)
 
 set -uo pipefail

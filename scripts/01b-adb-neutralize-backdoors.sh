@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# RecoveryOS Stage 1b: Immediate ADB Backdoor & Bloatware Neutralization
+# PipTweakOS Stage 1b: Immediate ADB Backdoor & Bloatware Neutralization
 # Target: Soyes XS18 Pro (Tigers TIS001_S4)
 # Safely disables and strips active user-0 installations of pre-installed
 # rootkits/backdoors, spec spoofers, and factory test packages without bricks.

@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" width="100%" height="340" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .ascii { font-family: 'Courier New', Courier, monospace; font-weight: bold; white-space: pre; }
+      .title { font-family: 'Courier New', Courier, monospace; font-weight: 900; letter-spacing: 3px; }
+    </style>
+  </defs>
+
+  <!-- 8-Bit Sunset Sky Bands (Prairie Sunset Gradient in Pixel Bands) -->
+  <rect x="0" y="0" width="960" height="36" fill="#2b0938"/>
+  <rect x="0" y="36" width="960" height="36" fill="#591254"/>
+  <rect x="0" y="72" width="960" height="36" fill="#941f57"/>
+  <rect x="0" y="108" width="960" height="36" fill="#c93843"/>
+  <rect x="0" y="144" width="960" height="36" fill="#ec662c"/>
+  <rect x="0" y="180" width="960" height="36" fill="#f9a12eff"/>
+  <rect x="0" y="216" width="960" height="34" fill="#ffd95a"/>
+
+  <!-- 8-Bit Dithered Sunset Scanlines -->
+  <rect x="0" y="32" width="960" height="4" fill="#591254"/>
+  <rect x="0" y="68" width="960" height="4" fill="#941f57"/>
+  <rect x="0" y="104" width="960" height="4" fill="#c93843"/>
+  <rect x="0" y="140" width="960" height="4" fill="#ec662c"/>
+  <rect x="0" y="176" width="960" height="4" fill="#f9a12e"/>
+  <rect x="0" y="212" width="960" height="4" fill="#ffd95a"/>
+
+  <!-- Giant 8-Bit Setting Sun on the Horizon -->
+  <rect x="640" y="104" width="140" height="16" fill="#ffe875"/>
+  <rect x="616" y="120" width="188" height="24" fill="#ffdf59"/>
+  <rect x="600" y="144" width="220" height="32" fill="#ffd23f"/>
+  <rect x="592" y="176" width="236" height="40" fill="#ffbe26"/>
+  <rect x="592" y="216" width="236" height="34" fill="#ffa812"/>
+
+  <!-- Distant Prairie Butte / Mesa Silhouettes -->
+  <polygon points="0,250 40,226 110,226 140,250" fill="#4a1c31"/>
+  <polygon points="480,250 510,218 580,218 610,234 650,234 675,250" fill="#4a1c31"/>
+  <polygon points="820,250 850,210 920,210 960,250" fill="#4a1c31"/>
+
+  <!-- Prairie Field Ground Layers -->
+  <rect x="0" y="250" width="960" height="24" fill="#5e3a18"/>
+  <rect x="0" y="274" width="960" height="30" fill="#3d2610"/>
+  <rect x="0" y="304" width="960" height="36" fill="#241508"/>
+
+  <!-- ASCII Prairie Grass & Wheat Stalks across Horizon -->
+  <text x="16" y="266" fill="#f9a12e" font-size="15" class="ascii">\|/  v  \|/   ~   \|/    v   \|/   ~   \|/  v  \|/   ~   \|/   v   \|/   ~   \|/  v  \|/   ~   \|/  v  \|/</text>
+  <text x="10" y="292" fill="#d48522" font-size="14" class="ascii">~  \|/   ~   \|/  v   ~  \|/   v   ~   \|/   ~  \|/   v   ~  \|/   ~  \|/   v   ~   \|/  v  ~  \|/   ~  \|/</text>
+  <text x="24" y="322" fill="#8f5716" font-size="14" class="ascii">v   ~   \|/   ~   v   \|/   ~   v   \|/   ~   v   \|/   ~   v   \|/   ~   v   \|/   ~   v   \|/   ~   v</text>
+
+  <!-- 8-Bit Cowboy Mouse with Corncob Pipe & Cheeky Grin (Left Side) -->
+  <!-- Smoke puffs from corncob pipe -->
+  <rect x="332" y="56" width="16" height="12" fill="#f4e6f7" opacity="0.8"/>
+  <rect x="348" y="40" width="24" height="14" fill="#f4e6f7" opacity="0.65"/>
+  <rect x="368" y="22" width="28" height="14" fill="#f4e6f7" opacity="0.45"/>
+
+  <!-- Big Round Mouse Ears (Peeking around Cowboy Hat) -->
+  <rect x="76" y="84" width="44" height="44" fill="#7c8594"/>
+  <rect x="84" y="92" width="28" height="28" fill="#eba0ac"/>
+  <rect x="236" y="84" width="44" height="44" fill="#7c8594"/>
+  <rect x="244" y="92" width="28" height="28" fill="#eba0ac"/>
+
+  <!-- 8-Bit Cowboy Hat (Crown, Crease, Hatband, Wide Brim) -->
+  <rect x="124" y="44" width="40" height="12" fill="#8b4513"/>
+  <rect x="192" y="44" width="40" height="12" fill="#8b4513"/>
+  <rect x="116" y="56" width="124" height="24" fill="#a0522d"/>
+  <rect x="116" y="80" width="124" height="10" fill="#d9381e"/> <!-- Red Sheriff Hatband -->
+  <rect x="172" y="80" width="12" height="10" fill="#ffd700"/> <!-- Gold Buckle -->
+  <rect x="68" y="90" width="220" height="14" fill="#8b4513"/> <!-- Wide Cowboy Brim -->
+  <rect x="60" y="82" width="16" height="12" fill="#8b4513"/> <!-- Curled Left Brim Tip -->
+  <rect x="280" y="82" width="16" height="12" fill="#8b4513"/> <!-- Curled Right Brim Tip -->
+
+  <!-- Mouse Head -->
+  <rect x="108" y="104" width="140" height="96" fill="#9ca4b3"/>
+  <rect x="100" y="120" width="156" height="68" fill="#9ca4b3"/>
+
+  <!-- Cheeky Eyes (One Winking/Cocked Brow, One Gleaming Pixel Eye) -->
+  <rect x="128" y="114" width="28" height="6" fill="#241508"/> <!-- Raised Cheeky Eyebrow -->
+  <rect x="132" y="126" width="20" height="20" fill="#1a1110"/>
+  <rect x="142" y="128" width="8" height="8" fill="#ffffff"/> <!-- Eye Glint -->
+  <rect x="200" y="118" width="28" height="6" fill="#241510"/>
+  <rect x="204" y="126" width="20" height="20" fill="#1a1110"/>
+  <rect x="214" y="128" width="8" height="8" fill="#ffffff"/> <!-- Eye Glint -->
+
+  <!-- Pink Nose & Whiskers -->
+  <rect x="170" y="148" width="18" height="12" fill="#ff6b8b"/>
+  <rect x="72" y="150" width="36" height="4" fill="#241508"/>
+  <rect x="68" y="162" width="40" height="4" fill="#241508"/>
+  <rect x="248" y="150" width="36" height="4" fill="#241508"/>
+  <rect x="248" y="162" width="40" height="4" fill="#241508"/>
+
+  <!-- Big Cheeky Lopsided Grin with Buck Teeth -->
+  <rect x="132" y="172" width="88" height="8" fill="#241508"/>
+  <rect x="124" y="164" width="10" height="10" fill="#241508"/> <!-- Left Smirk Corner -->
+  <rect x="218" y="160" width="12" height="14" fill="#241508"/> <!-- High Cheeky Right Smirk -->
+  <rect x="164" y="180" width="12" height="12" fill="#ffffff"/> <!-- Left Buck Tooth -->
+  <rect x="178" y="180" width="12" height="12" fill="#ffffff"/> <!-- Right Buck Tooth -->
+
+  <!-- Corncob Pipe Clenched in Cheeky Grin -->
+  <rect x="228" y="162" width="36" height="8" fill="#4a2c11"/> <!-- Dark Wood Stem -->
+  <rect x="264" y="156" width="48" height="10" fill="#d4a017"/> <!-- Corncob Shank -->
+  <rect x="308" y="120" width="36" height="46" fill="#f5c71a"/> <!-- Golden Corncob Bowl -->
+  <rect x="314" y="128" width="8" height="8" fill="#c68b12"/> <!-- Cob Kernel Texture -->
+  <rect x="328" y="128" width="8" height="8" fill="#c68b12"/>
+  <rect x="320" y="142" width="8" height="8" fill="#c68b12"/>
+  <rect x="314" y="152" width="8" height="8" fill="#c68b12"/>
+  <rect x="328" y="152" width="8" height="8" fill="#c68b12"/>
+  <rect x="312" y="114" width="28" height="6" fill="#ff4500"/> <!-- Glowing Ember -->
+
+  <!-- Red Bandana & Sheriffs Vest Torso -->
+  <polygon points="116,200 240,200 178,236" fill="#d9381e"/>
+  <rect x="124" y="208" width="108" height="42" fill="#6e4720"/>
+  <rect x="200" y="218" width="14" height="14" fill="#ffd700"/> <!-- Gold Sheriff Star -->
+
+  <!-- PipTweakOS Title & Subtitle Banner (Right Side) -->
+  <text x="384" y="102" fill="#241508" font-size="60" class="title">PipTweakOS</text>
+  <text x="380" y="98" fill="#ffe875" font-size="60" class="title">PipTweakOS</text>
+  <text x="382" y="138" fill="#ffd95a" font-size="18" class="ascii">8-BIT PRAIRIE GRIT FOR POCKET-SIZED ANDROID IRON</text>
+  <text x="382" y="168" fill="#ffffff" font-size="14" class="ascii">[ TARGET: SOYES XS18 PRO / TIGERS TIS001_S4 ]</text>
+  <text x="382" y="192" fill="#ffe875" font-size="14" class="ascii">[ STATUS: ROOTKITS ROPED • ZRAM TAMED • 900mAh HONEST ]</text>
+</svg>

@@ -1,6 +1,6 @@
 # Tools, Third-Party Applications, and Environment
 
-This document tracks every diagnostic application, flashing utility, driver, and filesystem tool used throughout the RecoveryOS project so community members can reproduce the workflow cleanly.
+This document tracks every diagnostic application, flashing utility, driver, and filesystem tool used throughout the PipTweakOS project so community members can reproduce the workflow cleanly.
 
 ## 1. On-Device Diagnostic Applications
 - **DevInfo** (Google Play Store)

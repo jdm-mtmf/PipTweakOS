@@ -1,6 +1,6 @@
-# Exposed: Inside the XS18 Pro ("Tigers TIS001_S4") — What Was Faked, Why It Was Unsafe, and How RecoveryOS Fixes It
+# Exposed: Inside the XS18 Pro ("Tigers TIS001_S4") — What Was Faked, Why It Was Unsafe, and How PipTweakOS Fixes It
 
-> **Who this guide is for:** Everyday owners of the **Soyes XS18 Pro / Tigers TIS001_S4** (and similar ultra-compact "mini phones" sold on Temu, AliExpress, and marketplace sites) who want to know why their phone feels broken out of the box—and how **RecoveryOS** turns it into the fast, safe pocket phone it should have been.
+> **Who this guide is for:** Everyday owners of the **Soyes XS18 Pro / Tigers TIS001_S4** (and similar ultra-compact "mini phones" sold on Temu, AliExpress, and marketplace sites) who want to know why their phone feels broken out of the box—and how **PipTweakOS** turns it into the fast, safe pocket phone it should have been.
 
 ---
 
@@ -22,12 +22,12 @@ Manufacturers of ultra-cheap clone phones often modify the phone's software so t
 ### 🚨 Breach #1: The Security Guard Was Turned Off at the Factory (`SELinux Permissive`)
 - **In Plain English:** Every modern Android phone has a built-in security wall called **SELinux**. It stops rogue apps from reading your passwords, texts, or banking data, even if malware gets onto the phone. On the stock XS18 Pro, **the manufacturer intentionally turned this wall off (`Permissive` mode).**
 - **Why They Did It:** Turning off SELinux allows the factory's hidden background programs (adware, silent app installers, and tracking tools) to have total control of the phone without triggering Android security errors.
-- **How RecoveryOS Fixes It:** We strip out the factory system partition completely, remove the hidden background programs, and rebuild the system cleanly so no unauthorized services run behind your back.
+- **How PipTweakOS Fixes It:** We strip out the factory system partition completely, remove the hidden background programs, and rebuild the system cleanly so no unauthorized services run behind your back.
 - **Impact:** **100% removal** of factory-bundled system adware and spyware hooks.
 
 ### 🚨 Breach #2: A 2025 Build Wearing a 2020 Disguise
 - **In Plain English:** Even though this firmware was compiled in **November 2025**, its Android security patches are frozen at **October 5, 2020**—leaving 5+ years of known security holes unpatched.
-- **How RecoveryOS Fixes It:** By leveraging the phone's **Project Treble (`VNDK 29.0`)** support, we replace the outdated factory operating system with a clean, community-audited open-source system image.
+- **How PipTweakOS Fixes It:** By leveraging the phone's **Project Treble (`VNDK 29.0`)** support, we replace the outdated factory operating system with a clean, community-audited open-source system image.
 
 ---
 
@@ -36,7 +36,7 @@ Manufacturers of ultra-cheap clone phones often modify the phone's software so t
 ### 🔋 Trap #1: The "1.72 GB ZRAM" CPU Stranglehold
 - **In Plain English:** Your phone has **1.92 GB of real memory (RAM)**. To make the phone look like it can hold more apps, the factory set up **1.72 GB of "ZRAM"** (nearly 90% of all memory!). ZRAM works by using the processor to zip and unzip memory every millisecond.
 - **Why It Ruins the Phone:** Because the XS18 Pro has a tiny quad-core processor (`MediaTek MT6580`), forcing it to zip and unzip 1.72 GB of memory non-stop pins the processor at 100% workload even when the phone is sitting in your pocket doing nothing. That turns your battery into a pocket heater and drains it in **under 60 minutes**.
-- **How RecoveryOS Fixes It:**
+- **How PipTweakOS Fixes It:**
   1. We remove the heavy factory bloatware so the operating system uses a fraction of the RAM.
   2. We shrink ZRAM from **1.72 GB down to a healthy 512 MB** (~25% of RAM).
 - **Expected Improvement:** **~65–70% reduction in idle CPU thrashing**, dramatically cooler operation, and **multi-hour standby and screen-on battery life** instead of under an hour.
@@ -44,13 +44,13 @@ Manufacturers of ultra-cheap clone phones often modify the phone's software so t
 ### 🔋 Trap #2: The 3,500 mAh Battery Lie (`25.7% Health` Bug)
 - **In Plain English:** You cannot physically fit a 3,500 mAh battery inside a phone the size of a credit card. The real battery inside is **900 mAh**. Because someone typed `3500` into the phone's configuration file, the phone's fuel gauge sees it top out at `900 mAh` and panics—reporting that your brand-new battery is at **25.7% health** ($\frac{900}{3500} = 25.7\%$).
 - **Why It Ruins the Phone:** The battery percentage meter drops unpredictably and shuts the phone off early because its math is based on a battery nearly **4x larger** than the real one.
-- **How RecoveryOS Fixes It:** We replace the fake `3,500 mAh` profile with the true **`900 mAh`** calibration (**reducing the calibration error by 74.3%** down to **0% error**), giving you an honest, predictable battery meter from 100% to 0%.
+- **How PipTweakOS Fixes It:** We replace the fake `3,500 mAh` profile with the true **`900 mAh`** calibration (**reducing the calibration error by 74.3%** down to **0% error**), giving you an honest, predictable battery meter from 100% to 0%.
 
 ---
 
 ## 3. Before & After Summary
 
-| Metric | Stock Factory Firmware | RecoveryOS (Target / Mitigated) | Improvement / Mitigation |
+| Metric | Stock Factory Firmware | PipTweakOS (Target / Mitigated) | Improvement / Mitigation |
 | :--- | :--- | :--- | :--- |
 | **System Security (`SELinux`)** | Disabled (`Permissive`) | Clean AOSP System + Audited Boot/Vendor | Eliminates factory rootkit/adware privileges |
 | **Memory Thrashing (ZRAM)** | `1.72 GB` (90% of RAM) | `512 MB` (26% of RAM) | **~70% reduction** in compressed-swap overhead |

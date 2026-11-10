@@ -25,7 +25,7 @@ Inspect extracted kernel command line (`cmdline`) and ramdisk `.rc` files for:
 ### Step 3.2: Audit `/vendor` & Fix `fstab.mt6580` ZRAM Allocation
 Locate the `zram0` entry in `/vendor/etc/fstab.mt6580` (or `init.mt6580.rc`):
 - **Stock (Broken)**: Allocates ~`1.72 GB` (`zramsize=90%` or `1845493760` bytes) on a `1.92 GB` RAM device.
-- **RecoveryOS Patch**: Set `zramsize=536870912` (`512 MB`) and configure `/proc/sys/vm/swappiness` to `40`.
+- **PipTweakOS Patch**: Set `zramsize=536870912` (`512 MB`) and configure `/proc/sys/vm/swappiness` to `40`.
 
 ## 4. Under the Hood
 - **Why 1.72 GB ZRAM destroys battery life**: Every swapped memory page is compressed and decompressed in software by the 32-bit `MT6580` CPU (`ARM Cortex-A7`). When stock bloatware fills RAM, the CPU gets trapped in a swap storm, draining the `900 mAh` battery in under an hour.
