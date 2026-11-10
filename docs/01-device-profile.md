@@ -2,46 +2,58 @@
 
 ## Overview
 - **Marketed / Clone Name**: Soyes XS18 Pro
-- **Internal Board / Firmware ID**: Tigers `TIS001_S4`
+- **Internal Board / Firmware ID**: Tigers `TIS001_S4` (`ro.product.board`: `r80h1_sye_c08`)
+- **Upstream Donor Firmware Fingerprint**: `iku/A25/A25:10/QP1A.190711.020/mp1V986:user/release-keys` (May 31, 2020 ODM base re-packaged on Nov 26, 2025)
+- **USB Vendor / Product ID (ADB/MTP)**: `0e8d:201d` (`TIGERS TIS001_S4`, Serial `0123456789ABCDEF`)
 - **Form Factor**: 3.0-inch Ultra-Compact Mini Smartphone (~90 x 46 x 10.5 mm, ~55g)
-- **Diagnostic Source (Initial)**: `DevInfo` (Google Play Store)
 
-## System & Build Details (Reported via `DevInfo`)
-- **Android Version Name**: Android 10 (Quince Tart)
-- **API Level**: `29`
-- **Build ID**: `QP1A.190711.020` (Standard AOSP Android 10 release tag)
+## System & Build Details (Verified via Stage 1 ADB Audit)
+- **Android Version Name**: Android 10 (Quince Tart, Go Edition `10_202009.go`, `ro.config.low_ram=true`)
+- **API Level**: `29` (`VNDK 29.0`)
+- **Build ID**: `QP1A.190711.020`
 - **Build Number**: `R80K3H1_SYE_C08_XS18Pro_Q_WELCOME_M52_20251126_1836`
-  - `R80K3H1`: Base board / ODM software revision identifier (`R80` = MT6580 Android 10 BSP family)
-  - `SYE_C08_XS18Pro`: Customer/Brand code (`SYE` = Soyes, `C08` = variant, `XS18Pro` = model)
-  - `Q`: Android 10 (Quince Tart) target branch
-  - `WELCOME_M52`: ODM / sub-brand build flavor ("WELCOME" / M52 board config)
-  - `20251126_1836`: Build timestamp (`2025-11-26 18:36`)
-- **Build Time**: `26 NOV 2025 04:37:09 CST`
-- **Security Patch Level**: `2020-10-05` (October 5, 2020)
-- **Root Status (Userland `su`)**: Not Yet Rooted (no user-accessible `su` binary exposed)
-- **SELinux Status**: **`Permissive`** *(Critical finding: stock firmware ships with SELinux disabled/permissive, typical of clone ROMs running unprivileged/rogue system daemons)*
+- **Build Fingerprint**: `TIGERS/TIS001_S4/TIS001_S4:10/QP1A.190711.020/mp1V986:user/release-keys`
+- **Baseband Version**: `MOLY.WR8.W1449.MD.WG.MP.V350.3` (`2024/11/28 16:46`, `LENTEK_Q0MP1_K80_BSP_HSPA_HW`, 2G/3G `W/G`)
+- **Security Patch Level**: `2020-10-05`
+- **SELinux Status**: **`Permissive`** (`getenforce` returns `Permissive`)
+- **Encryption**: File-Based Encryption (`ro.crypto.type=file`, `adiantum` cipher on `f2fs` `/data`)
 
-## Kernel & Partition Architecture
-- **Kernel Version**: `4.9.188`
-- **Kernel Architecture**: `armv7l` (32-bit ARM kernel & userland)
-- **Project Treble**: **Supported (`VNDK 29.0`)**
-- **System-as-Root (SAR)**: **Supported**
-- **Dynamic Partitions (`super`)**: **Supported** (logical partitions `system`, `vendor`, `product` inside `super`)
-- **Seamless Updates (A/B)**: **Not Supported** (A-only physical partition layout; note that Dynamic Partition GSIs use the `ab`/SAR image format even on non-A/B devices)
-- **Flash Protocol**: MediaTek Preloader / BROM (`mtkclient` / SP Flash Tool v5)
-- **Critical Backup Partitions**: `nvram`, `nvdata`, `proinfo`, `protect1`, `protect2`, `seccfg`, `lk`, `boot`, `recovery`, `vbmeta`, `super`
+## Verified Hardware Specifications
 
-## Reported vs. Verified Hardware Specifications
-
-With `QP1A.190711.020`, `VNDK 29.0`, and `Linux 4.9.188 (armv7l)`, `DevInfo` reads the genuine underlying **MediaTek MT6580**, **Android 10 (32-bit)**, **2 GB RAM**, and **16 GB eMMC** hardware, while exposing hardcoded ODM misconfigurations in battery design capacity (`3500 mAh` vs. `900 mAh`), display DPI (`160 ppi` -> `5.0"`), and ZRAM (`1.72 GB`).
-
-| Component | Reported by Device / `DevInfo` | Architectural Assessment / Verification Needed |
+| Component | Stock Reported / Configured | Verified Hardware Reality (`ADB` / `/proc` / `dumpsys`) |
 | :--- | :--- | :--- |
-| **SoC / Chipset** | **MediaTek MT6580** | **Verified 32-bit MediaTek MT6580** (Quad-Core ARM Cortex-A7 @ 1.3 GHz, matching `armv7l` kernel and `R80K3H1` board ID) |
-| **Architecture / ABI** | **`armv7l`** | **Verified 32-bit (`armeabi-v7a`)** — both kernel and binder are 32-bit |
-| **Android Version** | **Android 10 (`QP1A.190711.020`, API 29)** | **Verified Android 10 (VNDK 29.0)** running on Linux `4.9.188` |
-| **RAM** | **1.92 GB** (`SWAP/ZRAM`: **1.72 GB**) | **2 GB LPDDR3** physical RAM (with an overly aggressive ~90% `1.72 GB` ZRAM swap configuration causing heavy CPU thrashing on Cortex-A7) |
-| **Storage (eMMC)** | **16 GB** | **16 GB eMMC** (standard for the 2 GB / 16 GB `XS18 Pro` configuration; partition layout to be verified via `/proc/partitions`) |
-| **Display Resolution** | **640 x 480** @ **160 ppi (mdpi)**, **60 Hz**, No HDR, reported as **5.00"** | **480x640 VGA panel (~3.0" physical)**. Android computes `5.00"` because the kernel panel driver hardcodes `160 dpi` (`sqrt(640² + 480²) / 160 = 800 / 160 = 5.0"`), whereas true physical density on a 3.0" screen is ~267 ppi. |
-| **Modem / Baseband** | _TBD_ | _Verify baseband version & radio bands_ |
-| **Battery** | **3500 mAh** Design Cap (`4.22V`), **900 mAh** Est. Full-Charge (`25.7%` Health) | **900 mAh physical Li-Po cell**. The ODM hardcoded `3500 mAh` in `power_profile.xml`/kernel, causing Android to miscalculate `900 / 3500 = 25.7%` battery health and skew fuel-gauge discharge curves. |
+| **SoC / Chipset** | **MediaTek MT6580** | **MediaTek MT6580** (4x ARMv7 Cortex-A7 `0xc07` rev 3 @ 1.3 GHz, Mali-400 GPU) |
+| **Connectivity SoC** | `0x6580` | MediaTek MT6580 integrated Wi-Fi/BT/GPS (`patch 20200629194517a`) |
+| **Touchscreen IC** | _N/A_ | FocalTech / SemiConductor **`tlsc6x`** (`irq/261-tlsc6x_`) |
+| **RAM** | `2009708 kB` (**1.92 GB**) | **2 GB LPDDR3** (`ro.vendor.mtk_config_max_dram_size=0x80000000`) |
+| **ZRAM Swap** | `1808732 kB` (**1.72 GB**) | **`zramsize=90%,max_comp_streams=1`** in `/vendor/etc/fstab.mt6580` (single-stream compression bottleneck across 4 cores!) |
+| **Storage (eMMC)** | **16 GB** | **16 GB eMMC** (`11120000.mmc`): `system` (`679M`), `vendor` (`97M`), `product` (`613M`), `userdata` (`12G` `f2fs`), `cache` (`104M`) |
+| **Display** | `480 x 640` @ `160 dpi` (`5.00"`) | Physical **3.0" 480x640 panel** (`ro.sf.lcd_density=160` causes `800px / 160dpi = 5.0"` calculation) |
+| **Battery** | `3500 mAh` (`persist.sys.selbattery=3500`) | **`900 mAh` (`Charge counter: 900000` uAh)** @ `4.36V` full charge |
+
+## eMMC Partition Map (`/dev/block/platform/bootdevice/by-name/`)
+
+| Partition Name | Block Device | Mount / Role | Backup Priority |
+| :--- | :--- | :--- | :--- |
+| `preloader_a` / `b` | `/dev/block/mmcblk0boot0` / `boot1` | MediaTek Preloader / DRAM init | **Critical** |
+| `proinfo` | `/dev/block/mmcblk0p1` | Product info / serial / board config | **Critical (Unique)** |
+| `nvram` | `/dev/block/mmcblk0p2` | RF calibration & IMEI NVRAM | **Critical (Unique)** |
+| `protect1` | `/dev/block/mmcblk0p3` | `/mnt/vendor/protect_f` (ext4 modem calibration) | **Critical (Unique)** |
+| `protect2` | `/dev/block/mmcblk0p4` | `/mnt/vendor/protect_s` (ext4 modem calibration) | **Critical (Unique)** |
+| `seccfg` | `/dev/block/mmcblk0p5` | Bootloader lock state & security config | **High** |
+| `lk` / `lk2` | `/dev/block/mmcblk0p6` / `p7` | Little Kernel bootloader (`fastboot`) | **High** |
+| `boot` | `/dev/block/mmcblk0p8` | Linux `4.9.188` kernel + ramdisk | **High** |
+| `recovery` | `/dev/block/mmcblk0p9` | Stock recovery image | **High** |
+| `para` | `/dev/block/mmcblk0p10` | `/misc` bootloader control block | Standard |
+| `logo` | `/dev/block/mmcblk0p11` | Boot splash screen | Standard |
+| `dtbo` | `/dev/block/mmcblk0p12` | Device Tree Blob Overlay | **High** |
+| `vbmeta` | `/dev/block/mmcblk0p13` | Root Android Verified Boot (`AVB 1.1`) descriptor | **High** |
+| `vbmeta_system` | `/dev/block/mmcblk0p14` | System AVB descriptor (trusts `q-gsi`, `r-gsi`, `s-gsi` keys!) | **High** |
+| `vbmeta_vendor` | `/dev/block/mmcblk0p15` | Vendor AVB descriptor | **High** |
+| `frp` | `/dev/block/mmcblk0p17` | Factory Reset Protection (`/persistent`) | Standard |
+| `tee1` / `tee2` | `/dev/block/mmcblk0p18` / `p19` | Beanpod / iTrusty TEE (`3.4`) | **High** |
+| `nvdata` | `/dev/block/mmcblk0p20` | `/mnt/vendor/nvdata` (ext4 NVRAM runtime copy) | **Critical (Unique)** |
+| `md_udc` | `/dev/block/mmcblk0p21` | `/metadata` (ext4 FBE & dynamic partition metadata) | Standard |
+| `super` | `/dev/block/mmcblk0p26` | Dynamic partition container (`system` `dm-3`, `vendor` `dm-4`, `product` `dm-5`) | **High** |
+| `cache` | `/dev/block/mmcblk0p27` | `/cache` (`104 MB` ext4) | Low |
+| `userdata` | `/dev/block/mmcblk0p28` | `/data` (`12 GB` `f2fs`, `adiantum` FBE) | User Data |

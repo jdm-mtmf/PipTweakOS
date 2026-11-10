@@ -1,0 +1,39 @@
+# RecoveryOS Patched fstab.mt6580 for Soyes XS18 Pro (Tigers TIS001_S4)
+# Stock bug: zramsize=90%,max_comp_streams=1,swapprio=10 (1.72GB single-stream ZRAM on 1.92GB RAM)
+# Fix: 25% ZRAM (~500MB) with 4 parallel compression streams matching the quad-core MT6580
+/dev/block/zram0 none swap defaults zramsize=25%,max_comp_streams=4,swapprio=10
+
+system /system ext4 ro wait,,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+vendor /vendor ext4 ro wait,,avb,logical,first_stage_mount
+product /product ext4 ro wait,,avb,logical,first_stage_mount
+
+/dev/block/platform/bootdevice/by-name/md_udc /metadata ext4 noatime,nosuid,nodev,discard wait,formattable,first_stage_mount
+/dev/block/platform/bootdevice/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,reserve_root=134217,resgid=1065 wait,check,formattable,quota,resize,reservedsize=128m,fileencryption=adiantum:adiantum
+/dev/block/platform/bootdevice/by-name/cache /cache ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable
+
+/dev/block/platform/bootdevice/by-name/protect1 /mnt/vendor/protect_f ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
+/dev/block/platform/bootdevice/by-name/protect2 /mnt/vendor/protect_s ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
+/dev/block/platform/bootdevice/by-name/nvdata /mnt/vendor/nvdata ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable
+
+/dev/block/platform/bootdevice/by-name/frp /persistent emmc defaults defaults
+/devices/platform/externdevice* auto auto defaults voldmanaged=sdcard1:auto,encryptable=userdata
+
+/dev/block/platform/bootdevice/by-name/nvram /nvram emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/proinfo /proinfo emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/lk /bootloader emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/lk2 /bootloader2 emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/para /misc emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/recovery /recovery emmc defaults first_stage_mount,nofail,
+/dev/block/platform/bootdevice/by-name/boot /boot emmc defaults first_stage_mount,nofail,
+/dev/block/platform/bootdevice/by-name/vbmeta_vendor /vbmeta_vendor emmc defaults first_stage_mount,nofail,
+/dev/block/platform/bootdevice/by-name/vbmeta_system /vbmeta_system emmc defaults first_stage_mount,nofail,,avb=vbmeta
+/dev/block/platform/bootdevice/by-name/logo /logo emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/expdb /expdb emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/secro /secro emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/seccfg /seccfg emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/tee1 /tee1 emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/tee2 /tee2 emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/odmdtbo /odmdtbo emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/dtbo /dtbo emmc defaults defaults
+/dev/block/platform/bootdevice/by-name/vbmeta /vbmeta emmc defaults defaults
+/devices/platform/bus/mt_usb* auto auto defaults voldmanaged=usbotg:auto

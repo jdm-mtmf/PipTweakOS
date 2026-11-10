@@ -4,7 +4,33 @@
 Before unlocking the bootloader or altering any partition on the **Soyes XS18 Pro (`Tigers TIS001_S4`)**, we perform a non-destructive, read-only audit over **Android Debug Bridge (ADB)**. This captures the exact partition table, mount flags, pre-installed APK paths (including hidden rootkits/adware), and kernel logs from the live stock build (`R80K3H1_SYE_C08_XS18Pro_Q_WELCOME_M52_20251126_1836`).
 
 ## 2. Tools & Prerequisites
-- **Host OS**: Linux (recommended) with `adb` and `fastboot` installed (`android-tools` / `android-sdk-platform-tools`).
+- **Host OS**: Linux (native or WSL2 on Windows) with `adb` and `fastboot` installed (`/usr/local/bin/adb`).
+- **WSL2 USB Passthrough (Windows Hosts Only)**:
+  Because WSL2 does not expose physical Windows USB ports to Linux by default, open **PowerShell as Administrator** on Windows and run:
+  ```powershell
+  # Install usbipd-win if not already installed:
+  winget install --interactive --exact dorssel.usbipd-win
+
+  # Refresh PATH in the current PowerShell session (or open a new Admin PowerShell window):
+  $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+  # List connected USB devices and find the BUSID for the XS18 Pro / MediaTek device:
+  usbipd list
+
+  # Bind and attach the device to WSL2 (replace <BUSID> e.g. 1-1):
+  # Note: If UsbDk is installed on Windows, use --force and unplug/replug the USB cable once before attaching:
+  usbipd bind --force --busid <BUSID>
+  usbipd attach --wsl --busid <BUSID> --auto-attach
+  ```
+  *(Note: `--auto-attach` ensures that when the phone reboots into Fastboot or MediaTek BROM mode, Windows automatically re-attaches it to WSL2!)*
+- **Linux `udev` Permissions for MediaTek (`0e8d`)**:
+  So non-root commands (`adb`, `fastboot`, `mtkclient`) can access `/dev/bus/usb` without `no permissions` errors, add the MediaTek vendor rule on Linux/WSL2:
+  ```bash
+  echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0e8d", MODE="0666", GROUP="plugdev"' | sudo tee /etc/udev/rules.d/51-android-mediatek.rules
+  sudo udevadm control --reload-rules && sudo udevadm trigger
+  sudo chmod -R a+rw /dev/bus/usb/
+  adb kill-server && adb start-server
+  ```
 - **USB Cable**: Data-capable USB Type-C cable.
 - **On the Phone**:
   1. Open **Settings → About Phone** and tap **Build Number** 7 times until *"You are now a developer!"* appears.
@@ -24,17 +50,17 @@ adb devices -l
 - Terminal output showing your device in the `device` state.
 
 ### Step 3.2: Capture System Properties, Packages & Partition Layout
-Run the following read-only inspection commands (or run `scripts/01-adb-audit.sh` once connected):
+Run the automated Stage 1 read-only audit script:
 ```bash
-mkdir -p audit_output
-adb shell getprop > audit_output/getprop.txt
-adb shell pm list packages -f -U > audit_output/packages_full.txt
-adb shell cat /proc/partitions > audit_output/partitions.txt
-adb shell cat /proc/meminfo > audit_output/meminfo.txt
-adb shell cat /proc/swaps > audit_output/swaps.txt
-adb shell mount > audit_output/mounts.txt
-adb shell ls -la /dev/block/by-name/ > audit_output/by-name.txt
+./scripts/01-adb-audit.sh
 ```
+
+### Step 3.3: Immediate Backdoor & Spoofer Neutralization (Pre-Flash Safety)
+Before moving to Stage 2, immediately kill and strip the active **Redstone/Adups OTA backdoor (`com.abfota.systemUpdate`)**, the **ODM Spec Spoofer (`com.tyd.configdisplay`)**, and unremoved `uid:1000` factory test packages for the current user (`--user 0`):
+```bash
+./scripts/01b-adb-neutralize-backdoors.sh
+```
+This stops `com.abfota.systemUpdate` (`PID 1572`, 70 MB RAM) and `com.aiworks.faceidservice` (61 MB RAM), freeing over **130 MB of RAM** immediately without risking a bootloop.
 
 ## 4. Under the Hood
 - `/dev/block/by-name/` maps human-readable partition names (`boot`, `vbmeta`, `super`, `nvram`, `nvdata`, `recovery`) to raw `/dev/block/mmcblk0p*` eMMC block devices.
