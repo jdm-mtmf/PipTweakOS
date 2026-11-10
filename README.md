@@ -9,8 +9,8 @@
 🟥🟥🟥     _______|  ==========  |___   ( )                     .        🟥🟥🟥
 🟧🟧🟧    /_______    [======]    ___\   ||     ╔══════════════════════╗ 🟧🟧🟧
 🟧🟧🟧     ( (•)  |  ^        ^  | (•) ) ||     ║     PipTweakOS       ║ 🟧🟧🟧
-🟨🟨🟨      \___/ | (•)      (•) | \___/ 🌽     ║  "Small Iron.        ║ 🟨🟨🟨
-🟨🟨🟨    ═══╡    |      🐽      |═══════╝      ║   Big Prairie Grit." ║ 🟨🟨🟨
+🟨🟨🟨      \___/ | (•)      (•) | \___/ 🌽     ║                     ║ 🟨🟨🟨
+🟨🟨🟨    ═══╡    |      🐽      |═══════╝      ║                      ║ 🟨🟨🟨
 🟧🌅🟧    ═══╡    |  \___🦷🦷__/ |       ☀️     ╚══════════════════════╝ 🟧🌅🟧
 🌾🌾🌾 \|/ ~ \|/ ~ \____/🧣\____/ ~ \|/ ~ \|/ ~ \|/ ~ \|/ ~ \|/ ~ \|/ ~ 🌾🌾🌾
 🌾🌾🌾 ~ \|/ ~ v ~ \|/ ~ || ~ \|/ ~ v ~ \|/ ~ v ~ \|/ ~ v ~ \|/ ~ v ~ \ 🌾🌾🌾
@@ -19,7 +19,7 @@
 
 # 🤠🐭 PipTweakOS
 
-**Small Iron. Big Prairie Grit.**  
+
 *An open-source custom ROM, rootkit-wrangling, and hardware rehabilitation project that turns malware-ridden pocket clone phones into fast, honest, community-owned hardware.*
 
 </div>
